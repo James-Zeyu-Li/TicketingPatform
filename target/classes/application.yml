@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: TicketingPlatform
+  datasource:
+    username: root
+    password: Qweasd123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+#    host: sqldatabase.ci2ohbo6xdho.us-west-2.rds.amazonaws.com
+    database: ticket_platform
+    url: jdbc:mysql://${spring.datasource.host}:3306/${spring.datasource.database}?serverTimezone=UTC
+
+    hikari:
+      minimum-idle: 30
+      maximum-pool-size: 200
+

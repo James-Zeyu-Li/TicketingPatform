@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: TicketingPlatform
+
+  #SQL database setting
+  datasource:
+    username: root
+    password: Qweasd123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+#    host: sqldatabase.ci2ohbo6xdho.us-west-2.rds.amazonaws.com
+    database: ticket_platform
+    url: jdbc:mysql://${spring.datasource.host}:3306/${spring.datasource.database}?serverTimezone=UTC
+    hikari:
+      minimum-idle: 30
+      maximum-pool-size: 200
+
+  # redis datasource setting
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: your_redis_password
+      timeout: 5000
+      lettuce: # ??Lettuce???
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
+

@@ -1,0 +1,61 @@
+.
+├── HELP.md
+├── TicketingPlatform.iml
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── org
+│   │   │       └── java
+│   │   │           └── ticketingplatform
+│   │   │               ├── TicketingPlatformApplication.java
+│   │   │               ├── component
+│   │   │               │   └── DTO
+│   │   │               │       ├── TicketInfoDTO.java
+│   │   │               │       └── TicketRespondDTO.java
+│   │   │               ├── config
+│   │   │               │   ├── DynamoDbConfig.java
+│   │   │               │   ├── KafkaConfig.java
+│   │   │               │   └── RedisConfig.java
+│   │   │               ├── controller
+│   │   │               │   └── TicketPurchaseController.java
+│   │   │               ├── exception
+│   │   │               │   └── GeneralExceptionHandler.java
+│   │   │               ├── mapper
+│   │   │               │   └── TicketMapper.java
+│   │   │               ├── model
+│   │   │               │   ├── ErrorMessage.java
+│   │   │               │   ├── Event.java
+│   │   │               │   ├── TicketCreation.java
+│   │   │               │   ├── TicketInfo.java
+│   │   │               │   ├── TicketResponse.java
+│   │   │               │   ├── Venue.java
+│   │   │               │   └── Zone.java
+│   │   │               ├── repository
+│   │   │               │   ├── TicketDAO.java
+│   │   │               │   ├── TicketDAOInterface.java
+│   │   │               │   └── TicketSync.java
+│   │   │               ├── service
+│   │   │               │   ├── SeatOccupiedService.java
+│   │   │               │   ├── TicketService.java
+│   │   │               │   └── VenueConfigService.java
+│   │   │               └── serviceInterface
+│   │   │                   └── TicketServiceInterface.java
+│   │   └── resources
+│   │       ├── application.yml
+│   │       ├── schema.sql
+│   │       ├── static
+│   │       └── templates
+│   └── test
+│       └── java
+│           └── org
+│               └── java
+│                   └── ticketingplatform
+│                       ├── TicketingPlatformApplicationTests.java
+│                       └── test
+│                           └── TicketPurchaseControllerTest.java
+└── structure.txt
+
+26 directories, 33 files
