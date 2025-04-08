@@ -1,4 +1,5 @@
 # TicketingPatform
+
 The project implements a simpler version of the ticket purchasing program using Springboot, Redis, and Kafka. The test will be mainly concurrent testing and push the limit of concurrent ticket purchasing with intentionally designed seat conflicts. 
 
 The most important part will be the procedure of purchasing consumer tickets, but a simple and probably fixed Venue and Event will be implemented to simulate the ideal functionality that when users click different events and check different venues, the zones, tows, and columns will be changed accordingly. 
@@ -11,50 +12,51 @@ The usage of Kafka is ideally providing 2 functions, the first one is to quickly
 
 Please see below the current Structure of the project:
 
+```
+.
 ├── pom.xml
 ├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── org
-│   │   │       └── java
-│   │   │           └── ticketingPlatform
-│   │   │               ├── TicketingPlatformApplication.java
-│   │   │               ├── component
-│   │   │               │   └── DTO
-│   │   │               │       ├── TicketInfoDTO.java
-│   │   │               │       └── TicketRespondDTO.java
-│   │   │               ├── config
-│   │   │               │   ├── DynamoDbConfig.java
-│   │   │               │   ├── KafkaConfig.java
-│   │   │               │   └── RedisConfig.java
-│   │   │               ├── controller
-│   │   │               │   └── TicketPurchaseController.java
-│   │   │               ├── exception
-│   │   │               │   └── GeneralExceptionHandler.java
-│   │   │               ├── mapper
-│   │   │               │   └── TicketMapper.java
-│   │   │               ├── model
-│   │   │               │   ├── ErrorMessage.java
-│   │   │               │   ├── Event.java
-│   │   │               │   ├── TicketCreation.java
-│   │   │               │   ├── TicketInfo.java
-│   │   │               │   ├── TicketResponse.java
-│   │   │               │   ├── Venue.java
-│   │   │               │   └── Zone.java
-│   │   │               ├── repository
-│   │   │               │   ├── TicketDAO.java
-│   │   │               │   ├── TicketDAOInterface.java
-│   │   │               │   └── TicketSync.java
-│   │   │               ├── service
-│   │   │               │   ├── SeatOccupiedService.java
-│   │   │               │   ├── TicketService.java
-│   │   │               │   └── VenueConfigService.java
-│   │   │               └── serviceInterface
-│   │   │                   └── TicketServiceInterface.java
-│   │   └── resources
-│   │       ├── application.yml
-│   │       ├── schema.sql
-│   │       ├── static
-│   │       └── templates
-
-
+│   ├── main
+│   │   ├── java
+│   │   │   └── org
+│   │   │       └── java
+│   │   │           └── ticketingplatform
+│   │   │               ├── TicketingPlatformApplication.java
+│   │   │               ├── component
+│   │   │               │   └── DTO
+│   │   │               │       ├── TicketInfoDTO.java
+│   │   │               │       └── TicketRespondDTO.java
+│   │   │               ├── config
+│   │   │               │   ├── DynamoDbConfig.java
+│   │   │               │   ├── KafkaConfig.java
+│   │   │               │   └── RedisConfig.java
+│   │   │               ├── controller
+│   │   │               │   └── TicketPurchaseController.java
+│   │   │               ├── exception
+│   │   │               │   └── GeneralExceptionHandler.java
+│   │   │               ├── mapper
+│   │   │               │   └── TicketMapper.java
+│   │   │               ├── model
+│   │   │               │   ├── ErrorMessage.java
+│   │   │               │   ├── Event.java
+│   │   │               │   ├── TicketCreation.java
+│   │   │               │   ├── TicketInfo.java
+│   │   │               │   ├── TicketResponse.java
+│   │   │               │   ├── Venue.java
+│   │   │               │   └── Zone.java
+│   │   │               ├── repository
+│   │   │               │   ├── TicketDAO.java
+│   │   │               │   ├── TicketDAOInterface.java
+│   │   │               │   └── TicketSync.java
+│   │   │               ├── service
+│   │   │               │   ├── SeatOccupiedService.java
+│   │   │               │   ├── TicketService.java
+│   │   │               │   └── VenueConfigService.java
+│   │   │               └── serviceInterface
+│   │   │                   └── TicketServiceInterface.java
+│   │   └── resources
+│   │       ├── application.yml
+│   │       ├── schema.sql
+│   │       ├── static
+│   │       └── templates
+```
