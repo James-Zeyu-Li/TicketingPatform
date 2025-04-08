@@ -1,0 +1,9 @@
+# macOS system file
+.DS_Store
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven target output
+target/
