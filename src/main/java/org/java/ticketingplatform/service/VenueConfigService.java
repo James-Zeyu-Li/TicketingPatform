@@ -1,5 +1,6 @@
 package org.java.ticketingplatform.service;
 
+import org.java.ticketingplatform.Utils.RedisKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -15,58 +16,51 @@ public class VenueConfigService {
 		this.redisTemplate = redisTemplate;
 	}
 
+
 	// Add the venue and venue's zone into Redis
 	public void initializeVenueZone(String venueId, String zoneId, int rowCount, int colCount) {
-		String rowCountKey = String.format("venue:%s:zone:%s:rowCount", venueId, zoneId);
+		// row count in a zone for the venue
+		String rowCountKey = RedisKeyUtil.getRowCountKey(venueId, zoneId);
 		redisTemplate.opsForValue().set(rowCountKey, rowCount); // row count for zone
 
-		String seatPerRowKey = String.format("venue:%s:zone:%s:seatPerRow", venueId, zoneId);
+		// seat count for a zone for a row
+		String seatPerRowKey = RedisKeyUtil.getSeatPerRowKey(venueId, zoneId);
 		redisTemplate.opsForValue().set(seatPerRowKey, colCount); // column for zone
 
-		String capacityKey = String.format("venue:%s:zone:%s:capacity", venueId, zoneId);
+		// get the capacity for zone
+		String capacityKey = RedisKeyUtil.getZoneCapacityKey(venueId, zoneId);
 		redisTemplate.opsForValue().set(capacityKey, rowCount * colCount); //Zone capacity
 
-//		String zoneSetKey = String.format("venue:%s:zone:%s", venueId, zoneId);
-		redisTemplate.opsForSet().add("venue:" + venueId + ":zones", zoneId);
+		// get all zones in the set for venue
+		String venueZonesKey = RedisKeyUtil.getZoneSetKey(venueId);
+		redisTemplate.opsForSet().add(venueZonesKey, zoneId);
 	}
 
-	// get all zones form the Venue
+	// get all zones from the Venue
 	public Set<Object> getVenueZones(String venueId) {
-		return redisTemplate.opsForSet().members("venue:" + venueId + ":zones");
+		String venueZonesKey = RedisKeyUtil.getZoneSetKey(venueId);
+		return redisTemplate.opsForSet().members(venueZonesKey);
 	}
 
-	// get how many Rows per zone
 	public int getRowCount(String venueId, String zoneId) {
-		String rowCountKey = String.format("venue:%s:zone:%s", venueId, zoneId);
-		Object value = redisTemplate.opsForValue().get(rowCountKey);
-		if (value != null) {
-			try {
-				return Integer.parseInt(value.toString());
-			} catch (NumberFormatException e) {
-				return 0;
-			}
-		}
-		return 0;
+		String rowCountKey = RedisKeyUtil.getRowCountKey(venueId, zoneId);
+		return getIntValue(rowCountKey);
 	}
 
 	// to get the zone and find the seat in the row
 	public int getSeatPerRow(String venueId, String zoneId) {
-		String seatKey = String.format("venue:%s:zone:%s:seatPerRow", venueId, zoneId);
-		Object value = redisTemplate.opsForValue().get(seatKey);
-		if (value != null) {
-			try {
-				return Integer.parseInt(value.toString());
-			} catch (NumberFormatException e) {
-				return 0;
-			}
-		}
-		return 0;
+		String seatKey = RedisKeyUtil.getSeatPerRowKey(venueId, zoneId);
+		return getIntValue(seatKey);
 	}
 
 	// get zone configuration
 	public int getZoneCapacity(String venueId, String zoneId) {
-		String zoneKey = String.format("venue:%s:zone:%s:capacity", venueId, zoneId);
-		Object value = redisTemplate.opsForValue().get(zoneKey);
+		String zoneKey = RedisKeyUtil.getZoneCapacityKey(venueId, zoneId);
+		return getIntValue(zoneKey);
+	}
+
+	private int getIntValue(String key) {
+		Object value = redisTemplate.opsForValue().get(key);
 		if (value != null) {
 			try {
 				return Integer.parseInt(value.toString());

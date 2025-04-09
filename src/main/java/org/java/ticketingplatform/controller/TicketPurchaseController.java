@@ -20,32 +20,34 @@ public class TicketPurchaseController {
 	}
 
 	/**
-	 * Create the ticket using following parameters.
+	 * Create the ticket using the following parameters.
 	 *
-	 * @param event  eventID used to identify event
-	 * @param zone   zone as a first level identification Zone from 1 to 100
-	 * @param row    Row as a second level identification  row A - Z - AA -ZZ
+	 * @param venueId check all stats by venue
+	 * @param eventId  eventID used to identify event
+	 * @param zoneId   zone as a first level identification Zone from 1 to 100
+	 * @param row    Row as a second level identification row A - Z - AA - ZZ
 	 * @param column column being used to find the seat column from 1 to 30
 	 * @return String for the TicketID
 	 */
 	@PostMapping
 	private ResponseEntity<?> createTicket(
-			@RequestParam("event") String event,
-			@RequestParam("zone") String zone,
+			@RequestParam("venueId") String venueId,
+			@RequestParam("eventId") String eventId,
+			@RequestParam("zoneId") String zoneId,
 			@RequestParam("row") String row,
 			@RequestParam("column") String column) {
-		if (event == null || zone == null || row == null || column == null) {
+		if (eventId == null || zoneId == null || row == null || column == null) {
 			return ResponseEntity.badRequest()
 					.body("event, zone, row, column are required");
 		}
 
-		if (event.isEmpty() || zone.isEmpty() || row.isEmpty() || column.isEmpty()) {
+		if (eventId.isEmpty() || zoneId.isEmpty() || row.isEmpty() || column.isEmpty()) {
 			return ResponseEntity.badRequest()
 					.body("event, zone, row, column can not be blank");
 		}
 
 		try {
-			TicketRespondDTO ticketResponse = ticketService.createTicket(event, zone, row, column);
+			TicketRespondDTO ticketResponse = ticketService.createTicket(venueId, eventId, zoneId, row, column);
 			return ResponseEntity.status(HttpStatus.CREATED)
 					.body("Ticket Created \n" + ticketResponse);
 		} catch (Exception e) {

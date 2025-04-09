@@ -11,8 +11,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class TicketInfo {
 	private String ticketId;
+	private String venueId; //foreign key
 	private String eventID; //foreign key
-	private String zoneKey; //foreign key
+	private String zoneId; //foreign key
 	private String column;
 	private String row;
 	private Timestamp createTime;

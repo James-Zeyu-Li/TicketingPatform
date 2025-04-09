@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class TicketCreation {
 	private String id;
+	private String venueId;
 	private String eventId;
 	private String zone;
 	private String column;

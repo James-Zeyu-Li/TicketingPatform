@@ -5,6 +5,7 @@ import org.java.ticketingplatform.model.TicketInfo;
 import org.springframework.http.ResponseEntity;
 
 public interface TicketServiceInterface {
-	TicketRespondDTO createTicket(String event, String zone, String Row, String column);
+	TicketRespondDTO createTicket(String venueId, String eventId, String zoneId, String Row, String column);
+	// call get from DAO
 	TicketInfo getTicket(String ticketId);
 }

@@ -60,6 +60,7 @@ public class TicketDAO implements TicketDAOInterface {
 				if (resultSet.next()) {
 					return new TicketInfo(
 							resultSet.getString("ticketID"),
+							resultSet.getString("venueID"),
 							resultSet.getString("eventID"),
 							resultSet.getString("zone"),
 							resultSet.getString("column"),
